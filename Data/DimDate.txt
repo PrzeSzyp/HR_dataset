@@ -1,7 +1,6 @@
 DimDate = 
 VAR _minYear = YEAR(MIN(DimEmployee[HireDate]))
 VAR _maxYear = YEAR(MAX(DimEmployee[HireDate]))
-VAR _fiscalStart = 6 
 
 RETURN
 ADDCOLUMNS(
@@ -37,8 +36,5 @@ ADDCOLUMNS(
 "QuarterEnd",EOMONTH(DATE( YEAR([Date]), QUARTER([Date])*3, 1),0),
 "WeekNumber",WEEKNUM([Date]),
 "WeekStart", [Date]-WEEKDAY([Date])+1,
-"WeekEnd",[Date]+7-WEEKDAY([Date]),
-"FiscalYear",if(_fiscalStart=1,YEAR([Date]),YEAR([Date])+ QUOTIENT(MONTH([Date])+ (13-_fiscalStart),13)),
-"FiscalQuarter",QUARTER( DATE( YEAR([Date]),MOD( MONTH([Date])+ (13-_fiscalStart) -1 ,12) +1,1) ),
-"FiscalMonth",MOD( MONTH([Date])+ (13-_fiscalStart) -1 ,12) +1
+"WeekEnd",[Date]+7-WEEKDAY([Date])
 )
